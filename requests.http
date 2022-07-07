@@ -1,0 +1,16 @@
+# curl -i -X PUT http://localhost:8080/https://ya.ru
+PUT http://localhost:8080/https:golang.org
+
+###
+
+# curl -i  -X POST http://localhost:8080/https:golang.org
+POST http://localhost:8080/https:golang.org
+
+###
+
+# curl -i http://localhost:8080/
+GET http://localhost:8080/
+
+###
+
+
