@@ -1,3 +1,15 @@
+# TEST на некорректный адрес
+
+# curl -X POST --location "http://localhost:8080"
+#    -H "Content-Type: application/x-www-form-urlencoded"
+#    -d "http://w4hg5arixnareg.ru/xyzdpb/fctfrjdu"
+POST http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+
+http://w4hg5arixnareg.ru/xyzdpb/fctfrjdu
+
+###
+
 # curl -X POST --location "http://localhost:8080"
 #    -H "Content-Type: text/plain"
 #    -d "https://golang.org"
