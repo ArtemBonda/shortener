@@ -21,3 +21,31 @@ git fetch template && git checkout template/main .github
 ```
 
 Затем добавьте полученные изменения в свой репозиторий.
+
+## Инремент 1
+
+1. Создание сервера по адресу "http://localhost:8080"
+2. Обслуживающий 2 эндпоинта: POST / и GET /{id}
+3. POST / в теле запроса принимает строку URL для сокращения
+4. GET {id} принимает в качестве параметра идентификатор сокращенного URL, возвращает код 307 и оригинальный URL в HTTP-заголовке Location
+5. Учесть некорректные запросы
+
+Запуск проекта
+
+```
+go run cmd/shortener/main.go
+```
+
+Проверка эндпоинтов
+
+```http request
+POST http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+
+https://yandex.ru
+```
+
+```http request
+GET http://localhost:8080/e9db20
+
+```
