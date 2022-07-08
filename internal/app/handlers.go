@@ -43,9 +43,7 @@ func RootAcceptURL(wr http.ResponseWriter, r *http.Request) {
 			http.Error(wr, err.Error(), http.StatusInternalServerError)
 			return
 		}
-
 		wr.WriteHeader(http.StatusCreated)
-		fmt.Fprintf(wr, "key: %s, value: %s", key, string(body))
 	default:
 		http.Error(wr, "not found", http.StatusNotFound)
 	}
