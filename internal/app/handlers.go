@@ -14,25 +14,19 @@ func RootAcceptURL(wr http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		id := r.URL.Path[1:]
-		if id == "" {
-			fmt.Println("URL not found")
-			http.Error(wr, http.StatusText(http.StatusNotFound), http.StatusNotFound)
-			return
-		}
 
 		originURL, err := DB.SearchLink(id)
 		if err != nil {
-			fmt.Println("URL not found")
+			fmt.Println("not found")
 			http.Error(wr, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 			return
 		}
-		wr.Header().Set("Location", originURL)
-		wr.WriteHeader(http.StatusTemporaryRedirect)
-		wr.Write([]byte(id))
+		http.Redirect(wr, r, originURL, http.StatusTemporaryRedirect)
+
 	case http.MethodPost:
 		body, err := io.ReadAll(r.Body)
 		if err != nil {
-			http.Error(wr, err.Error(), http.StatusBadRequest)
+			http.Error(wr, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 		}
 		defer r.Body.Close()
 
@@ -40,7 +34,7 @@ func RootAcceptURL(wr http.ResponseWriter, r *http.Request) {
 		fmt.Println(string(body))
 		err = DB.AddLink(key, string(body))
 		if err != nil {
-			http.Error(wr, err.Error(), http.StatusInternalServerError)
+			http.Error(wr, http.StatusText(http.StatusBadRequest), http.StatusInternalServerError)
 			return
 		}
 		wr.WriteHeader(http.StatusCreated)
