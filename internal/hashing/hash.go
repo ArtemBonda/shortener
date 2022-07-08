@@ -5,9 +5,7 @@ import (
 	"fmt"
 )
 
-func HashURLAddr(url []byte) string {
-	h := md5.New()
-	h.Write(url)
-	result := fmt.Sprintf("%x", h.Sum(nil))
+func HashURLAddr(url string) string {
+	result := fmt.Sprintf("%x", md5.Sum([]byte(url)))
 	return result[:6]
 }

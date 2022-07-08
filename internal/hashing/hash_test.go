@@ -12,13 +12,14 @@ func TestHashURLAddr(t *testing.T) {
 		want string
 	}{
 		// TODO: Add test cases.
-		{name: "Test #1", args: args{something: "https://golang.org"}, want: HashURLAddr([]byte("https://golang.org"))},
-		{name: "Empty String", args: args{something: ""}, want: HashURLAddr([]byte(""))},
+		{name: "Test #1", args: args{something: "https://golang.org"}, want: HashURLAddr("https://golang.org")},
+		{name: "Test #2", args: args{something: "https://ya.ru"}, want: HashURLAddr("https://ya.ru")},
+		{name: "Empty String", args: args{something: ""}, want: HashURLAddr("")},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Helper()
-			if got := HashURLAddr([]byte(tt.args.something)); got != tt.want {
+			if got := HashURLAddr(tt.args.something); got != tt.want {
 				t.Errorf("HashURLAddr() = %v, want %v", got, tt.want)
 			}
 		})
