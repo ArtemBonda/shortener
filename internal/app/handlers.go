@@ -9,7 +9,12 @@ import (
 	"net/url"
 )
 
-var DB = entity.Short{}
+type URLStorage interface {
+	Show(hashURL string) string
+	Add(hashURL, origin string)
+}
+
+var DB = entity.DB{}
 
 func RootAcceptURL(wr http.ResponseWriter, r *http.Request) {
 	switch r.Method {
@@ -33,12 +38,6 @@ func RootAcceptURL(wr http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
 
 		if _, err = url.ParseRequestURI(string(body)); err != nil {
-			http.Error(wr, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
-			return
-		}
-
-		_, err = http.Get(string(body))
-		if err != nil {
 			http.Error(wr, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 			return
 		}
