@@ -1,0 +1,49 @@
+# TEST на некорректный адрес
+
+# curl -X POST --location "http://localhost:8080"
+#    -H "Content-Type: application/x-www-form-urlencoded"
+#    -d "http://w4hg5arixnareg.ru/xyzdpb/fctfrjdu"
+POST http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+
+http://w4hg5arixnareg.ru/xyzdpb/fctfrjdu
+
+###
+
+# curl -X POST --location "http://localhost:8080"
+#    -H "Content-Type: text/plain"
+#    -d "https://golang.org"
+POST http://localhost:8080
+Content-Type: text/plain
+
+https://golang.org
+
+###
+
+# curl -X POST --location "http://localhost:8080"
+#    -d "https://yandex.ru"
+POST http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+
+https://yandex.ru
+
+###
+
+# curl -i localhost:8080/
+GET http://localhost:8080/e9db20
+
+###
+
+# NotFound
+# curl -i localhost:8080/
+GET http://localhost:8080/d41bcd
+
+###
+
+# NotFound
+PUT http://localhost:8080/
+Content-Type: text/plain
+
+https://yandex.ru
+
+###
